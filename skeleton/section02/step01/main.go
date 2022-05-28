@@ -18,9 +18,9 @@ func main() {
 	fmt.Println("3: falseと表示される")
 	fmt.Println("4: パニックが起きる")
 
-	// TODO: answerというint型の変数を宣言
-	// TODO: "回答>"と表示
-	// TODO: 回答の入力
+	var answer int
+	fmt.Println("回答>")
+	fmt.Scanln(&answer)
 
 	// 回答の表示
 	fmt.Println("あなたの回答:", answer)
