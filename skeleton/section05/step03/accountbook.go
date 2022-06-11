@@ -74,7 +74,8 @@ func (ab *AccountBook) readItems() {
 func (ab *AccountBook) AddItem(item *Item) {
 	ab.items = append(ab.items, item)
 
-	// TODO: 書き込み用でファイルを開き、結果を変数fと変数errに入れる
+	// 書き込み用でファイルを開き、結果を変数fと変数errに入れる
+	f, err := os.Create(ab.file)
 
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "エラー：", err)
@@ -82,8 +83,9 @@ func (ab *AccountBook) AddItem(item *Item) {
 	}
 
 	for _, item := range ab.items {
-		// TODO: 品目,値段の形式でファイルに出力する
+		// 品目,値段の形式でファイルに出力する
 		// 2つめの結果だけ変数errに入れる
+		_, err = fmt.Fprintf(f, "%s,%d\n", item.Category, item.Price)
 
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "エラー：", err)

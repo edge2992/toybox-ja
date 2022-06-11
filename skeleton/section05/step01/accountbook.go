@@ -13,8 +13,8 @@ type AccountBook struct {
 
 // 新しいAccountBookを作成する
 func NewAccountBook() *AccountBook {
-	// TODO: AccountBookのポインタを返す
-
+	// AccountBookのポインタを返す
+	return new(AccountBook)
 }
 
 // 新しいItemを追加する
@@ -24,9 +24,10 @@ func (ab *AccountBook) AddItem(item *Item) {
 
 // 最近追加したものを最大limit件だけItemを取得する
 func (ab *AccountBook) GetItems(limit int) []*Item {
-	// TODO: 返す件数を求め変数nに入れる
-
-	if /* TODO: 変数limitより件数が少ない場合 */ {
+	// 返す件数を求め変数nに入れる
+	n := len(ab.items) - limit
+	/* 変数limitより件数が少ない場合 */
+	if n < 0 {
 		n = 0
 	}
 	return ab.items[n:]

@@ -28,8 +28,8 @@ func main() {
 				if n > 0 {
 					break
 				}
-				// TODO: 標準エラー出力に「1以上を入力してください」と表示する
-
+				// 標準エラー出力に「1以上を入力してください」と表示する
+				fmt.Fprintln(os.Stderr, "1以上を入力してください")
 			}
 
 			for i := 0; i < n; i++ {
@@ -48,8 +48,8 @@ func main() {
 		if ab.NumItems() > 20 {
 			fmt.Fprintln(os.Stderr, "これ以上家計簿を増やすことができません")
 			fmt.Fprintln(os.Stderr, "終了します")
-			// TODO: 終了コードを1でプログラムを終了する
-
+			//  終了コードを1でプログラムを終了する
+			os.Exit(1)
 		}
 	}
 }

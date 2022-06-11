@@ -14,6 +14,7 @@ var (
 func init() {
 	// TODO: 変数flagOutputDirにdirというオプションを設定する
 	// デフォルト値は"."、説明は"出力先のディレクトリ"
+	flag.StringVar(&flagOutputDir, "dir", ".", "出力先のディレクトリ")
 
 }
 
@@ -53,6 +54,7 @@ func main() {
 		case 3: // 集計
 			summaries := ab.GetSummaries()
 			// TODO: 出力先ディレクトリとファイル名"summary.csv"を結合して変数fileに入れる
+			file := filepath.Join(flagOutputDir, "summary.csv")
 
 			SaveSummary(file, summaries)
 			fmt.Println(file, "を出力しました")
