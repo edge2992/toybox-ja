@@ -15,13 +15,16 @@ type Event struct {
 // Calendarはイベントカレンダーを表す
 type Calendar struct {
 	// 現在時刻を返す関数をNowフィールドとして定義
-
+	Now    func() time.Time
 	events []*Event
 }
 
 func NewCalendar() *Calendar {
 	return &Calendar{
 		// TODO: Nowフィールドにtimeパッケージで定義されている現在時刻を返す関数を設定
+		Now: func() time.Time {
+			return time.Now()
+		},
 	}
 }
 

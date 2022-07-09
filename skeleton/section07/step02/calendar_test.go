@@ -1,4 +1,4 @@
-package /* TODO: テスト対象のパッケージ名の後ろに_testをつけたもの */
+package eventcal_test
 
 import (
 	"fmt"
@@ -50,6 +50,21 @@ func TestCalendar_Recent(t *testing.T) {
 		{
 			name: "recent 2days",
 			// TODO: 最近2日間のイベントを取得するテストケースを書く
+			now: func() time.Time {
+				return time.Date(2021, 11, 18, 10, 0, 0, 0, time.Local)
+			},
+			starts: []time.Time{
+				time.Date(2021, 11, 18, 10, 0, 0, 0, time.Local),
+				time.Date(2021, 11, 19, 10, 0, 0, 0, time.Local),
+				time.Date(2021, 11, 20, 10, 0, 0, 0, time.Local),
+			},
+			durations: []time.Duration{
+				1 * time.Hour,
+				1 * time.Hour,
+				1 * time.Hour,
+			},
+			days: 2,
+			want: []int{0, 1},
 		},
 		{
 			name: "past events",
@@ -65,15 +80,14 @@ func TestCalendar_Recent(t *testing.T) {
 				1 * time.Hour,
 			},
 			days: 1,
-			// TODO: 期待する結果を書く
-
+			want: []int{1},
 		},
 	}
 
 	for _, tt := range cases {
 		tt := tt
-		t.Run(/* TODO: サブテスト名を指定する */, func(t *testing.T) {
-			// TODO: このサブテスト関数を並列実行可にする
+		t.Run("my calender", func(t *testing.T) {
+			t.Parallel()
 
 			cal := eventcal.NewCalendar()
 			cal.Now = tt.now
@@ -108,7 +122,7 @@ func TestCalendar_Recent(t *testing.T) {
 			}
 			sort.Strings(wantTitles)
 
-			if /* TODO* wantTitlesとgotTitlesの差分をcmp.Diffで取得する */; diff != "" {
+			if diff := cmp.Diff(gotTitles, wantTitles); diff != "" {
 				t.Error(diff)
 			}
 		})
